@@ -36,8 +36,8 @@ export const alumnoService = {
     },
 
     updateOneProduct: async (id, updatedProduct) => {
-        const sql = "UPDATE producto SET nombreproduct = ?, cantidad = ?, costo = ?, descripcion = ? WHERE id = ?";
-        const params = [updatedProduct.nombreproduct, updatedProduct.cantidad, updatedProduct.costo, updatedProduct.descripcion, id];
+        const sql = "UPDATE alumnos SET name = ?, email = ?, matricula = ?, grado = ?, c1 = ?, c2 = ?, c3 =? WHERE id = ?";
+        const params = [updatedProduct.name, updatedProduct.email, updatedProduct.matricula, updatedProduct.grado, updatedProduct.c1, updatedProduct.c2, updatedProduct.c3, id];
         try {
             const [result] = await db.query(sql, params);
             return result.affectedRows > 0 ? { id, ...updatedProduct } : null;
@@ -47,7 +47,7 @@ export const alumnoService = {
     },
     
     deleteOneProduct : async (id) => {
-        const sql = 'DELETE FROM producto WHERE id = ?';
+        const sql = 'DELETE FROM alumnos WHERE id = ?';
         const params = [id];
         try {
             const result = await db.query(sql, params);
