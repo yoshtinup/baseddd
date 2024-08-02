@@ -1,25 +1,26 @@
-import { registroService } from "../services/registroService.js";
 
-export const registroController = {
+import { AdminService } from "../services/adminService.js";
+
+export const AdminController = {
     getAllProducts : async (req, res) => {
-        const allProducts = await registroService.getAllProducts();
+        const allProducts = await AdminService.getAllProducts();
         res.status(200).send(allProducts);
     },
     getOneProduct : async (req, res) => {
         let id = req.params.id;
-        const product = await registroService.getOneProduct(id);
+        const product = await AdminService.getOneProduct(id);
         res.status(200).send({ status: "OK", data: product });
     },
     createNewProduct : async (req, res) => {
         const data = req.body;
-        const createProduct = await registroService.createNewProduct(data);
+        const createProduct = await AdminService.createNewProduct(data);
         res.status(200).send({ status: "OK", data: createProduct });
     },
     updateOneProduct: async (req, res) => {
         const id = req.params.id;
         const data = req.body; // Obtener datos del cuerpo de la solicitud
         try {
-            const updatedProduct = await registroService.updateOneProduct(id, data);
+            const updatedProduct = await AdminService.updateOneProduct(id, data);
             if (updatedProduct) {
                 res.status(200).send({ status: "OK", data: updatedProduct });
             } else {
@@ -31,7 +32,7 @@ export const registroController = {
     },
     deleteOneProduct : async (req, res) => {
         let id = req.params.id;
-        const deleteProduct = registroService.deleteOneProduct(id);
+        const deleteProduct = AdminService.deleteOneProduct(id);
         res.send("Delete an existing workout");
     }
 }

@@ -1,8 +1,8 @@
 import {db} from '../../database/mysql.js'
 
-export const productsService = {
+export const AdminService = {
     getAllProducts : async () => {
-        const sql = "SELECT * FROM producto";
+        const sql = "SELECT * FROM administrador";
         try {
             const [data] = await db.query(sql, []);
             return data;
@@ -12,7 +12,7 @@ export const productsService = {
     },    
     
     getOneProduct : async (id) => {
-        const sql = "SELECT * FROM producto WHERE id=?";
+        const sql = "SELECT * FROM administrador WHERE id=?";
         const params = [id];
         try {
             const [result] = await db.query(sql, params);
@@ -24,19 +24,19 @@ export const productsService = {
     },
      
     createNewProduct : async (product) => {
-        const sql = "INSERT INTO producto (nombreproduct, cantidad, costo, descripcion) VALUES (?, ?, ?, ?)";
-        const params = [product.nombreproduct, product.cantidad, product.costo, product.descripcion];
+        const sql = "INSERT INTO administrador (name, matricula, gmail) VALUES (?, ?, ?)";
+        const params = [product.name, product.matricula, product.gmail];
         try {
             const [result] = await db.query(sql, params);
-            return {nombreproduct: product.nombreproduct, cantidad: product.cantidad, costo: product.costo, descripcion: product.descripcion, id: result.insertId}
+            return {name: product.name, matricula: product.matricula, gmail: product.gmail, id: result.insertId}
         } catch (error) {
             return null;
         }
     },
 
     updateOneProduct: async (id, updatedProduct) => {
-        const sql = "UPDATE producto SET nombreproduct = ?, cantidad = ?, costo = ?, descripcion = ? WHERE id = ?";
-        const params = [updatedProduct.nombreproduct, updatedProduct.cantidad, updatedProduct.costo, updatedProduct.descripcion, id];
+        const sql = "UPDATE administrador SET name = ?, matricula = ?, gmail = ? WHERE id = ?";
+        const params = [updatedProduct.name, updatedProduct.matricula, updatedProduct.gmail, id];
         try {
             const [result] = await db.query(sql, params);
             return result.affectedRows > 0 ? { id, ...updatedProduct } : null;
@@ -46,7 +46,7 @@ export const productsService = {
     },
     
     deleteOneProduct : async (id) => {
-        const sql = 'DELETE FROM producto WHERE id = ?';
+        const sql = 'DELETE FROM administrador WHERE id = ?';
         const params = [id];
         try {
             const result = await db.query(sql, params);
