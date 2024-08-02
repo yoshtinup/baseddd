@@ -9,7 +9,7 @@ export const alumnoController = {
     getOneProduct : async (req, res) => {
         let id = req.params.id;
         const product = await alumnoService.getOneProduct(id);
-        res.status(200).send({ status: "OK", data: product });
+        res.status(200).send(product);
     },
     createNewProduct : async (req, res) => {
         const data = req.body;
